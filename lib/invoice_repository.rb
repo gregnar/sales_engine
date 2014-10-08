@@ -6,6 +6,7 @@ class InvoiceRepository < Repository
   attr_reader :repo
   def initialize
     @repo = []
+    #sales_engine = SalesEngine
   end
 
   def find_by_id(arg); finder(:id, arg); end
@@ -14,5 +15,7 @@ class InvoiceRepository < Repository
   def find_by_status(arg); finder(:status, arg); end
   def find_by_created_at(arg); finder(:created_at, arg); end
   def find_by_updated_at(arg); finder(:updated_at, arg); end
+
+
 
 end

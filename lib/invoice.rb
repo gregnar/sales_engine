@@ -6,7 +6,7 @@ class Invoice
                 :created_at,
                 :updated_at
 
-  def initialize
+  def initialize()
     @id
     @customer_id
     @merchant_id
@@ -31,3 +31,5 @@ class Invoice
   end
 
 end
+
+#invoice_repo.find_merchant_by_id(self.merchant_id)
