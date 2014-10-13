@@ -1,32 +1,29 @@
-require_relative 'test_helper'
+require_relative 'helper_test'
 require './lib/csv_parser'
 require './lib/repository'
 
 class RepositoryTest < Minitest::Test
 
-  def repo
-    @repo = []
-  end
+  class TestClass
+    attr_reader :id,
+                :name,
+                :created_at,
+                :updated_at
 
-  class Merchant
-    attr_accessor :id,
-                  :name,
-                  :created_at,
-                  :updated_at
-
-    def initialize
-      @id          = ""
-      @name        = ""
-      @created_at  = ""
-      @updated_at  = ""
+    def initialize(data, repository)
+      @id          = data[:id]
+      @name        = data[:name]
+      @created_at  = data[:created_at]
+      @updated_at  = data[:updated_at]
+      @repository  = repository
     end
   end
 
-  class MerchantRepository < Repository
-    attr_reader :repo
+  class TestClassRepository < Repository
+    attr_reader :repository
 
     def initialize
-      @repo = []
+      @repository = []
     end
 
     def find_by_id(arg); finder(:id, arg); end
@@ -36,11 +33,9 @@ class RepositoryTest < Minitest::Test
   end
 
   def test_it_can_load_an_id
-    @merchants_test = CSVParser.new.load_csv("./data/merchants_test.csv")
-    @merchant_repository = MerchantRepository.new
-    @merchant = Merchant
-    @merchant_repository.populate_repository(@merchants_test, @merchant)
-    assert_equal 1, @merchant_repository.repo[0].id
+    repository = TestClassRepository.new
+    repository.populate_repository("./data/customers_test.csv", TestClass)
+    assert_equal 1, repository.repository[0].id
   end
 
 end
