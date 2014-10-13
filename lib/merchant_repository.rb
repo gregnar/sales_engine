@@ -43,6 +43,10 @@ class MerchantRepository < Repository
   end
 
   def revenue(date, arg)
+    #revenue(date) returns the total revenue for that date across all merchants
+    #find by invoice.merchant_id to return all seccessful transactions (via invoice_id) on a specific date
+    #map merchant revenue by date, add the revenue to 0 to find
+    #revenue = BigDecimal.new
   end
 
   def random

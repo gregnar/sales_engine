@@ -33,6 +33,17 @@ class Merchant
     revenue
   end
 
+  def invoice_paid
+    #select invoice.has_been_paid (transaction success)
+  end
+
+  def revenue(date)
+    #revenue(date) returns the total revenue for that merchant for a specific invoice date
+    #invoice_paid, look for:
+    #invoice.created_at (or updated_at) needs to be a date
+    #invoice.transactions
+  end
+
   def favorite_customer
     #customer who has conducted the most successful transactions
   end
