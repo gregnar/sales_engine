@@ -21,6 +21,10 @@ class Invoice
     repository.find_transaction_by_id(self.id)
   end
 
+  def successful_transactions
+    transactions.keep_if(&:success?)
+  end
+
   def invoice_items
     repository.find_invoice_items_by_invoice_id(self.id)
   end
@@ -37,5 +41,3 @@ class Invoice
     repository.find_merchant_by_id(self.id)
   end
 end
-
-#invoice_repo.find_merchant_by_id(self.merchant_id)

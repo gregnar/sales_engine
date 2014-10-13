@@ -33,8 +33,12 @@ class Merchant
     revenue
   end
 
+  def customers
+   invoices.flat_map(&:customer).uniq
+  end
+
   def favorite_customer
-    #customer who has conducted the most successful transactions
+    customers.max_by(&:successful_transactions_count)
   end
 
   def customers_with_pending_invoices

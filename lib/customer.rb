@@ -20,6 +20,13 @@ class Customer
   end
 
   def transactions
+    invoices.map {|}
+  end
+
+  def successful_transactions_count
+    invoices.inject(0) do |sum, invoice|
+      sum + invoice.successful_transactions.count
+    end
   end
 
   def favorite_merchant
