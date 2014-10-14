@@ -30,4 +30,8 @@ class InvoiceItem
   def total_cost
     unit_price * quantity
   end
+
+  def customer
+    @customer ||= invoice.customer
+  end
 end

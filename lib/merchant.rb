@@ -67,7 +67,6 @@ class Merchant
     end
   end
 
-
   def favorite_customer
     customers.max_by do |cust|
       cust.successful_transactions_with_merchant(self).count
@@ -79,7 +78,7 @@ class Merchant
   end
 
   def successful_transactions_with_customer(cust)
-
+    successful_invoice_items.select { |ii| ii.customer == cust }
   end
 
 end
