@@ -84,4 +84,8 @@ class Merchant
     customers.select{ |cust| cust.pending_transactions_with_merchant?(self) }
   end
 
+  def successful_transactions_with_customer(cust)
+    
+  end
+
 end
