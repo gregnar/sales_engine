@@ -47,11 +47,12 @@ class ItemRepository < Repository
     repository.sort_by(&:revenue).pop(number_of_items).reverse
   end
 
-  def most_items(arg)
-
+  def most_items(number_of_items)
+    repository.sort_by(&:number_sold).pop(number_of_items).reverse
   end
 
   def random
     repository.sample
   end
 end
+Hash.new{customer: "customer", merchant: "merchant", status: "shipped", items: ["item1", "item2", "item3"]}
