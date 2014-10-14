@@ -35,6 +35,7 @@ class Merchant
 
   def customers
    invoices.flat_map(&:customer).uniq
+  end
 
   def invoice_paid
     #select invoice.has_been_paid (transaction success)
@@ -48,7 +49,8 @@ class Merchant
   end
 
   def favorite_customer
-    customers.max_by(&:successful_transactions_count)
+    customers.max_by {|cust|
+       cust.successful_transactions_by_merchant(self).count}
   end
 
   def customers_with_pending_invoices

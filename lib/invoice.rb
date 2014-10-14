@@ -22,7 +22,7 @@ class Invoice
   end
 
   def successful_transactions
-    transactions.keep_if(&:success?)
+    transactions.select(&:success?)
   end
 
   def invoice_items
@@ -38,7 +38,7 @@ class Invoice
   end
 
   def merchant
-    repository.find_merchant_by_id(self.id)
+    repository.find_merchant_by_id(self.merchant_id)
   end
 
   def has_been_paid?

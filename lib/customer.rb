@@ -20,13 +20,15 @@ class Customer
   end
 
   def transactions
-    invoices.map {|}
+    invoices.flat_map(&:transactions)
   end
 
-  def successful_transactions_count
-    invoices.inject(0) do |sum, invoice|
-      sum + invoice.successful_transactions.count
-    end
+  def successful_transactions
+    transactions.select(&:success?)
+  end
+
+  def successful_transactions_by_merchant(instance)
+    successful_transactions.select {|trans| trans.merchant == instance }
   end
 
   def favorite_merchant

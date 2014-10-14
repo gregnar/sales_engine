@@ -23,6 +23,10 @@ class Transaction
     repository.find_invoice_by_id(self.invoice_id)
   end
 
+  def merchant
+    invoice.merchant
+  end
+
   def success?
     result == "success"
   end
