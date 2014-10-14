@@ -37,7 +37,7 @@ class MerchantRepository < Repository
   end
 
   def most_revenue(number_of_merchants)
-    repository.each {|merchant| puts merchant.revenue }
+    # repository.each {|merchant| puts merchant.revenue }
     # sorted.pop(number_of_merchants)
   end
 
