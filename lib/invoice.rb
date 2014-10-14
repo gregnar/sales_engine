@@ -41,7 +41,4 @@ class Invoice
     repository.find_merchant_by_id(self.merchant_id)
   end
 
-  def has_been_paid?
-    #transaction.success?
-  end
 end

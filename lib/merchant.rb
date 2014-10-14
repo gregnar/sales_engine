@@ -25,35 +25,37 @@ class Merchant
     invoices.map { |invoice| invoice.invoice_items }.flatten
   end
 
-  def revenue(arg=nil)
+  def revenue(date=nil)
+    if date
+      invoice_items_paid_by_date = invoice_items_paid.select do |ii|
+        Date.parse(ii.invoice.created_at).to_date == date
+      end
+      calculate_revenue(invoice_items_paid_by_date)
+    else
+      calculate_revenue(invoice_items)
+    end
+  end
+
+  def calculate_revenue(ii_list)
     revenue = BigDecimal.new("0")
-    invoice_items.map { |ii|
+    ii_list.map { |ii|
     revenue += ii.total_cost if ii.invoice.transactions.any?(&:success?)
     }
     revenue
+  end
+
+  def invoice_items_paid
+    invoice_items.select { |ii| ii.invoice.successful_transactions }
   end
 
   def customers
    invoices.flat_map(&:customer).uniq
   end
 
-  def invoice_paid
-    #select invoice.has_been_paid (transaction success)
-  end
-
-  def revenue(date)
-    #revenue(date) returns the total revenue for that merchant for a specific invoice date
-    #invoice_paid, look for:
-    #invoice.created_at (or updated_at) needs to be a date
-    #invoice.transactions
-  end
-
   def favorite_customer
-    customers.max_by {|cust|
-       cust.successful_transactions_by_merchant(self).count}
+    customers.max_by(&:successful_transactions_count)
   end
 
   def customers_with_pending_invoices
   end
-
 end
