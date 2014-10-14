@@ -36,8 +36,12 @@ class Customer
     successful_transactions.select {|trans| trans.merchant == merchant_obj }
   end
 
+  def merchants
+    invoices.flat_map(&:merchant)
+  end
+
   def favorite_merchant
-    #where customer has conducted the most successful transactions
+    merchants.max_by { |merchant| merchant.successful_transactions_with_customer(self).count }
   end
 
 end

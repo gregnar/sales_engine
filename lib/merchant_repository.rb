@@ -41,6 +41,7 @@ class MerchantRepository < Repository
   end
 
   def most_items(arg)
+    repository.sort_by
   end
 
   def revenue(date)

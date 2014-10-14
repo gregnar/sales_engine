@@ -29,5 +29,6 @@ class Item
   end
 
   def best_day
+    invoice_items.inject { |sum, ii| Date.parse(ii.invoice.created_at).to_date }
   end
 end
