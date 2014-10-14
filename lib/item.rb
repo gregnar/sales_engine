@@ -31,6 +31,10 @@ class Item
     end
   end
 
+  def number_sold
+    successful_invoice_items.inject(0) {|sum, ii| sum + ii.quantity}
+  end
+
   def invoice_items
     @invoice_items ||= repository.find_invoice_items_by_item_id(self.id)
   end
