@@ -37,18 +37,14 @@ class MerchantRepository < Repository
   end
 
   def most_revenue(number_of_merchants)
-    # repository.each {|merchant| puts merchant.revenue }
-    # sorted.pop(number_of_merchants)
+    repository.sort_by(&:revenue).pop(number_of_merchants).reverse
   end
 
   def most_items(arg)
   end
 
-  def revenue(date, arg)
-    #revenue(date) returns the total revenue for that date across all merchants
-    #find by invoice.merchant_id to return all seccessful transactions (via invoice_id) on a specific date
-    #map merchant revenue by date, add the revenue to 0 to find
-    #revenue = BigDecimal.new
+  def revenue(date)
+    repository.inject(0) { |sum, merchant| sum + merchant.revenue(date) }
   end
 
   def random

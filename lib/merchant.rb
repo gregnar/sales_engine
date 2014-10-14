@@ -64,7 +64,9 @@ class Merchant
   end
 
   def favorite_customer
-    customers.max_by(&:successful_transactions_count)
+    customers.max_by do |cust| 
+      cust.successful_transactions_with_merchant(self).count
+    end
   end
 
   def customers_with_pending_invoices
