@@ -27,8 +27,13 @@ class Customer
     transactions.select(&:success?)
   end
 
-  def successful_transactions_by_merchant(instance)
-    successful_transactions.select {|trans| trans.merchant == instance }
+  def pending_transactions_with_merchant?(merchant_obj)
+    invoices_with_merchant = invoices.find_all {|i| i.merchant == merchant_obj }
+    invoices_with_merchant.any? { |i| i.transactions.none?(&:success?) }
+  end
+
+  def successful_transactions_with_merchant(merchant_obj)
+    successful_transactions.select {|trans| trans.merchant == merchant_obj }
   end
 
   def favorite_merchant

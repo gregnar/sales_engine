@@ -36,7 +36,9 @@ class MerchantRepository < Repository
     sales_engine.find_invoices_by_merchant_id(merchant_id)
   end
 
-  def most_revenue(arg)
+  def most_revenue(number_of_merchants)
+    repository.each {|merchant| puts merchant.revenue }
+    # sorted.pop(number_of_merchants)
   end
 
   def most_items(arg)
