@@ -6,8 +6,8 @@ class MerchantRepository < Repository
 
   def initialize(sales_engine, filepath)
     @sales_engine = sales_engine
-    @repository = []
-    @filepath = filepath
+    @repository   = []
+    @filepath     = filepath
   end
 
   def inspect
@@ -18,15 +18,15 @@ class MerchantRepository < Repository
     populate_repository("#{filepath}/merchants.csv", Merchant)
   end
 
-  def find_by_id(arg); find_by(:id, arg); end
-  def find_by_name(arg); find_by(:name, arg); end
-  def find_by_created_at(arg); find_by(:created_at, arg); end
-  def find_by_updated_at(arg); find_by(:updated_at, arg); end
+  def find_by_id(arg)             ; find_by(:id, arg)            ; end
+  def find_by_name(arg)           ; find_by(:name, arg)          ; end
+  def find_by_created_at(arg)     ; find_by(:created_at, arg)    ; end
+  def find_by_updated_at(arg)     ; find_by(:updated_at, arg)    ; end
 
-  def find_all_by_id(arg); find_all_by(:id, arg); end
-  def find_all_by_name(arg); find_all_by(:name, arg); end
-  def find_all_by_created_at(arg); find_all_by(:created_at, arg); end
-  def find_all_by_updated_at(arg); find_all_by(:updated_at, arg); end
+  def find_all_by_id(arg)         ; find_all_by(:id, arg)        ; end
+  def find_all_by_name(arg)       ; find_all_by(:name, arg)      ; end
+  def find_all_by_created_at(arg) ; find_all_by(:created_at, arg); end
+  def find_all_by_updated_at(arg) ; find_all_by(:updated_at, arg); end
 
   def find_items_by_id(id)
     sales_engine.find_items_by_id(id)

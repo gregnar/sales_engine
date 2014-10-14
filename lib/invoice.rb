@@ -18,7 +18,7 @@ class Invoice
   end
 
   def transactions
-    @transactions ||= repository.find_transaction_by_id(self.id)
+    @transactions  ||= repository.find_transaction_by_id(self.id)
   end
 
   def successful?
@@ -30,15 +30,15 @@ class Invoice
   end
 
   def items
-    @items ||= invoice_items.map { |ii| ii.item }
+    @items         ||= invoice_items.map { |ii| ii.item }
   end
 
   def customer
-    @customer ||= repository.find_customer_by_id(self.customer_id)
+    @customer      ||= repository.find_customer_by_id(self.customer_id)
   end
 
   def merchant
-    @merchant ||= repository.find_merchant_by_id(self.merchant_id)
+    @merchant      ||= repository.find_merchant_by_id(self.merchant_id)
   end
 
 end

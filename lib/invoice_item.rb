@@ -24,7 +24,7 @@ class InvoiceItem
   end
 
   def item
-    @item ||= repository.find_item_by_id(self.item_id)
+    @item    ||= repository.find_item_by_id(self.item_id)
   end
 
   def total_cost

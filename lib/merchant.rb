@@ -32,12 +32,6 @@ class Merchant
   def customers
     @customers ||= invoices.flat_map(&:customer).uniq
   end
-  # def revenue(arg = nil)
-  #   # successes = successful_invoice_items
-  #   invoice_items.inject(0) do |sum, ii|
-  #       sum + ii.total_cost
-  #   end
-  # end
 
   def successful_invoice_items
     invoice_items.reject { |ii| ii.invoice.transactions.none?(&:success?) }
@@ -85,7 +79,7 @@ class Merchant
   end
 
   def successful_transactions_with_customer(cust)
-    
+
   end
 
 end

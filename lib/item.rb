@@ -24,8 +24,19 @@ class Item
   #   invoice_items.inject(0) {|sum, ii| sum + ii.quantity}
   # end
 
+  def revenue
+    # revenue = BigDecimal.new("0")
+    successful_invoice_items.inject(0) do |sum, ii|
+      sum + ii.total_cost
+    end
+  end
+
   def invoice_items
     @invoice_items ||= repository.find_invoice_items_by_item_id(self.id)
+  end
+
+  def successful_invoice_items
+    @successful_invoice_items ||= invoice_items.select { |ii| ii.invoice.successful? }
   end
 
   def merchant
