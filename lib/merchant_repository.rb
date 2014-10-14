@@ -40,7 +40,8 @@ class MerchantRepository < Repository
     repository.sort_by(&:revenue).pop(number_of_merchants).reverse
   end
 
-  def most_items(arg)
+  def most_items(number_of_items)
+    repository.sort_by(&:items_sold).pop(number_of_items).reverse
   end
 
   def revenue(date)

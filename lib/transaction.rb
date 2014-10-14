@@ -20,11 +20,11 @@ class Transaction
   end
 
   def invoice
-    repository.find_invoice_by_id(self.invoice_id)
+    @invoice ||= repository.find_invoice_by_id(self.invoice_id)
   end
 
   def merchant
-    invoice.merchant
+    @merchant ||= invoice.merchant
   end
 
   def success?

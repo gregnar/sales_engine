@@ -16,15 +16,15 @@ class Customer
   end
 
   def invoices
-    repository.find_invoices_by_id(self.id)
+    @invoices ||= repository.find_invoices_by_id(self.id)
   end
 
   def transactions
-    invoices.flat_map(&:transactions)
+    @transactions ||= invoices.flat_map(&:transactions)
   end
 
   def successful_transactions
-    transactions.select(&:success?)
+    @successful_transactions ||= transactions.select(&:success?)
   end
 
   def pending_transactions_with_merchant?(merchant_obj)
@@ -33,7 +33,7 @@ class Customer
   end
 
   def successful_transactions_with_merchant(merchant_obj)
-    successful_transactions.select {|trans| trans.merchant == merchant_obj }
+    successful_transactions.select { |trans| trans.merchant == merchant_obj }
   end
 
   def favorite_merchant

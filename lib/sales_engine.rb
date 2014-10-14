@@ -93,7 +93,7 @@ class SalesEngine
   end
 end
 
-# engine = SalesEngine.new
-# engine.startup
-# invoice = engine.invoice_repository.find_by_id(1002)
-# puts invoice.items.size
+engine = SalesEngine.new
+engine.startup
+merchant = engine.merchant_repository.repository.sample
+merchant.revenue

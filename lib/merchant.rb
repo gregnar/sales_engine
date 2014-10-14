@@ -3,28 +3,35 @@ class Merchant
               :name,
               :created_at,
               :updated_at,
-              :repository
+              :repository,
+              :invoices,
+              :invoice_items,
+              :customers,
+              :items
 
   def initialize(data, repository)
-    @id          = data[:id]
-    @name        = data[:name]
-    @created_at  = data[:created_at]
-    @updated_at  = data[:updated_at]
-    @repository  = repository
+    @id            = data[:id]
+    @name          = data[:name]
+    @created_at    = data[:created_at]
+    @updated_at    = data[:updated_at]
+    @repository    = repository
   end
 
   def items
-    repository.find_items_by_id(self.id)
+    @item ||= repository.find_items_by_id(self.id)
   end
 
   def invoices
-    repository.find_invoices_by_id(self.id)
+    @invoices ||= repository.find_invoices_by_id(self.id)
   end
 
   def invoice_items
-    invoices.map { |invoice| invoice.invoice_items }.flatten
+    @invoice_items ||= invoices.flat_map(&:invoice_items)
   end
 
+  def customers
+    @customers ||= invoices.flat_map(&:customer).uniq
+  end
   # def revenue(arg = nil)
   #   # successes = successful_invoice_items
   #   invoice_items.inject(0) do |sum, ii|
@@ -38,10 +45,7 @@ class Merchant
 
   def revenue(date=nil)
     if date
-      invoice_items_paid_by_date = invoice_items_paid.select do |ii|
-        Date.parse(ii.invoice.created_at).to_date == date
-      end
-      calculate_revenue(invoice_items_paid_by_date)
+      calculate_revenue(invoice_items_paid_by_date(date))
     else
       calculate_revenue(invoice_items)
     end
@@ -55,16 +59,23 @@ class Merchant
     revenue
   end
 
-  def invoice_items_paid
-    invoice_items.select { |ii| ii.invoice.successful_transactions }
+  def items_sold
+    successful_invoice_items.inject(0) {|sum, ii| sum + ii.quantity }
   end
 
-  def customers
-   invoices.flat_map(&:customer).uniq
+  def invoice_items_paid
+    invoice_items.select { |ii| ii.invoice.successful? }
   end
+
+  def invoice_items_paid_by_date(date)
+    invoice_items_paid.select do |ii|
+      Date.parse(ii.invoice.created_at).to_date == date
+    end
+  end
+
 
   def favorite_customer
-    customers.max_by do |cust| 
+    customers.max_by do |cust|
       cust.successful_transactions_with_merchant(self).count
     end
   end

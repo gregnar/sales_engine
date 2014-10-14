@@ -19,13 +19,17 @@ class Item
     @repository   = repository
   end
 
+  # def total_sold
+  #   successes = invoice_items.reject_if {|ii| ii.invoice.}
+  #   invoice_items.inject(0) {|sum, ii| sum + ii.quantity}
+  # end
 
   def invoice_items
-    repository.find_invoice_items_by_item_id(self.id)
+    @invoice_items ||= repository.find_invoice_items_by_item_id(self.id)
   end
 
   def merchant
-    repository.find_merchant_by_id(self.merchant_id)
+    @merchant ||= repository.find_merchant_by_id(self.merchant_id)
   end
 
   def best_day
