@@ -21,7 +21,7 @@ class Invoice
   end
 
   def transactions
-    @transactions  ||= repository.find_transaction_by_id(self.id)
+    repository.find_transaction_by_id(self.id)
   end
 
   def successful?
