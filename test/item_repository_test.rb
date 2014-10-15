@@ -8,6 +8,7 @@ class ItemRepositoryTest < Minitest::Test
 
   def setup
     @engine = SalesEngine.new(File.expand_path("../data", __FILE__))
+    @engine.startup
     @item_repository = @engine.item_repository
   end
 
@@ -23,4 +24,13 @@ class ItemRepositoryTest < Minitest::Test
     assert engine.item_repository
   end
 
+  def test_random
+    item_one = engine.item_repository.random
+    item_two = engine.item_repository.random
+    10.times do
+      break if item_one.id != item_two.id
+      item_two = engine.item_repository.random
+    end
+    refute item_one == item_two
+  end
 end

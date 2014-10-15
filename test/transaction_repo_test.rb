@@ -7,6 +7,7 @@ class TransactionRepoTest < Minitest::Test
 
   def setup
     @engine = SalesEngine.new(File.expand_path("../data", __FILE__))
+    @engine.startup
     @transaction_repository = @engine.transaction_repository
   end
 
@@ -35,6 +36,16 @@ class TransactionRepoTest < Minitest::Test
     transaction = transaction_repository.repository.first
     assert_equal "4654405418249632", transaction.credit_card_number.to_s
     assert_equal "1", transaction.id.to_s
+  end
+
+  def test_random
+    transaction_one = engine.transaction_repository.random
+    transaction_two = engine.transaction_repository.random
+    10.times do
+      break if transaction_one.id != transaction_two.id
+      transaction_two = engine.transaction_repository.random
+    end
+    refute transaction_one == transaction_two
   end
 
 end

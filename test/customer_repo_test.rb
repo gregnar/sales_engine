@@ -8,6 +8,7 @@ class CustomerRepoTest < Minitest::Test
 
   def setup
     @engine = SalesEngine.new(File.expand_path("../data", __FILE__))
+    @engine.startup
     @customer_repository = @engine.customer_repository
   end
 
@@ -17,6 +18,16 @@ class CustomerRepoTest < Minitest::Test
 
   def test_find_by_created_at
     assert_equal customer_repository.repository[1], customer_repository.find_by_created_at("2012-03-27 14:54:10 UTC")
+  end
+
+  def test_random
+    customer_one = engine.customer_repository.random
+    customer_two = engine.customer_repository.random
+    10.times do
+      break if customer_one.id != customer_two.id
+      customer_two = engine.customer_repository.random
+    end
+    refute customer_one == customer_two
   end
 
 end

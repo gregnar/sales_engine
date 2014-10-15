@@ -54,8 +54,12 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_random
-    merch1 = merchant_repository.random
-    merch2 = merchant_repository.random
-    refute merch1 == merch2
+    merchant_one = engine.merchant_repository.random
+    merchant_two = engine.merchant_repository.random
+    10.times do
+      break if merchant_one.id != merchant_two.id
+      merchant_two = engine.merchant_repository.random
+    end
+    refute merchant_one == merchant_two
   end
 end

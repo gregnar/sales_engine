@@ -51,4 +51,15 @@ class InvoiceRepositoryTest < Minitest::Test
     assert_equal "shipped", invoice.status.to_s
     assert_equal "1", invoice.id.to_s
   end
+
+  def test_random
+    invoice_one = engine.invoice_repository.random
+    invoice_two = engine.invoice_repository.random
+    10.times do
+      break if invoice_one.id != invoice_two.id
+      invoice_two = engine.invoice_repository.random
+    end
+    refute invoice_one == invoice_two
+  end
+
 end
