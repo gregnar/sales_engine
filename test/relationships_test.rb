@@ -21,7 +21,7 @@ class RelationshipsTest < Minitest::Test
 
   def test_item_find_by_invoice_item_id_method
     item = @item_repository.repository.first
-    assert_instance_of InvoiceItem, item.invoice_item
+    assert_instance_of InvoiceItem, item.invoice_items.first
   end
 
   def test_invoice_item_find_by_invoice_id_method
@@ -37,17 +37,17 @@ class RelationshipsTest < Minitest::Test
 
   def test_invoice_find_all_by_transaction_id_method
     invoice = @invoice_repository.repository.first
-    assert_instance_of Transaction, invoice.transactions
+    assert_instance_of Transaction, invoice.transactions.first
   end
 
   def test_invoice_find_all_by_invoice_items_method
     invoice = @invoice_repository.repository.first
-    assert_instance_of InvoiceItem, invoice.invoice_items
+    assert_instance_of InvoiceItem, invoice.invoice_items.first
   end
 
   def test_invoice_find_all_by_item_id_method
     invoice = @invoice_repository.repository.first
-    assert_instance_of Item, invoice.items
+    assert_instance_of Item, invoice.items.first
   end
 
   def test_invoice_find_by_customer_id_method
@@ -62,12 +62,12 @@ class RelationshipsTest < Minitest::Test
 
   def test_merchant_find_all_by_item_id_method
     merchant = @merchant_repository.repository.first
-    assert_instance_of Item, merchant.items
+    assert_instance_of Item, merchant.items.first
   end
 
   def test_merchant_find_all_by_invoice_id_method
     merchant = @merchant_repository.repository.first
-    assert_instance_of Invoice, merchant.invoices
+    assert_instance_of Invoice, merchant.invoices.first
   end
 
   def test_transaction_find_by_invoice_id_method
@@ -77,7 +77,7 @@ class RelationshipsTest < Minitest::Test
 
   def test_customer_find_all_by_invoice_id_method
     customer = @customer_repository.repository.first
-    assert_instance_of Invoice, customer.invoices
+    assert_instance_of Invoice, customer.invoices.first
   end
 
 end
