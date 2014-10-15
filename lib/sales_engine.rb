@@ -93,7 +93,7 @@ class SalesEngine
   end
 end
 
-engine = SalesEngine.new
-engine.startup
-merchant = engine.merchant_repository.repository.sample
-merchant.revenue
+# engine = SalesEngine.new
+# engine.startup
+# merchant = engine.merchant_repository.repository.sample
+# merchant.revenue
