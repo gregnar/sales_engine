@@ -17,7 +17,7 @@ class InvoiceRepositoryTest < Minitest::Test
 
 
 
-  def test_create_invoice
+  def test_create_invoice_create
     customer = @engine.customer_repository.find_by_id(7)
     merchant = @engine.merchant_repository.find_by_id(22)
     items    = (1..3).map { @engine.item_repository.random }
