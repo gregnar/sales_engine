@@ -52,6 +52,20 @@ class InvoiceRepository < Repository
     sales_engine.find_merchant_by_id(merchant_id)
   end
 
+  def new_id
+    repository.max_by(&:id).id + 1
+  end
+
+  def create(data)
+    new_attrs = {
+                  id: new_id, customer_id: data[:customer].id,
+                  merchant_id: data[:merchant].id, created_at: DateTime.now,
+                  updated_at: DateTime.now, items: data[:items]
+                }
+    return new_invoice = Invoice.new(new_attrs, self)
+    repository << new_invoice
+  end
+
   def random
     repository.sample
   end

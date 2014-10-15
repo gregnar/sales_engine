@@ -5,15 +5,18 @@ class Invoice
               :merchant_id,
               :status,
               :created_at,
-              :updated_at
+              :updated_at,
+              :items
 
   def initialize(data, repository)
+    @data         = data
     @id           = data[:id]
     @customer_id  = data[:customer_id]
     @merchant_id  = data[:merchant_id]
     @status       = data[:status]
     @created_at   = data[:created_at]
     @updated_at   = data[:updated_at]
+    @items        = data[:items] if data.include?(:items)
     @repository   = repository
   end
 

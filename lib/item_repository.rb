@@ -55,4 +55,3 @@ class ItemRepository < Repository
     repository.sample
   end
 end
-Hash.new{customer: "customer", merchant: "merchant", status: "shipped", items: ["item1", "item2", "item3"]}
