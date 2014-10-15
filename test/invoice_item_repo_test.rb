@@ -7,18 +7,11 @@ class InvoiceItemRepoTest < Minitest::Test
   attr_reader :invoice_item_repository, :engine
 
   def setup
-    @engine = SalesEngine.new
-    @invoice_item_repository = InvoiceItemRepository.new(SalesEngine.new, "data")
-  end
-
-  def test_repo_gets_populated
-    invoice_item_repository.make_repo
-    assert_instance_of InvoiceItem, invoice_item_repository.repository[0], "not instance of InvoiceItem"
-    assert_instance_of InvoiceItem, invoice_item_repository.repository[-1], "not instance of InvoiceItem"
+    @engine = SalesEngine.new(File.expand_path("../data", __FILE__))
+    @invoice_item_repository = @engine.invoice_item_repository
   end
 
   def test_it_has_a_repository
-    invoice_item_repository.make_repo
     assert invoice_item_repository.repository
   end
 
@@ -34,8 +27,8 @@ class InvoiceItemRepoTest < Minitest::Test
     assert invoice_item_repository.repository
     invoice_item_repository.make_repo
     ii = invoice_item_repository.repository.first
-    assert_equal "5", ii.quantity.to_s
-    assert_equal "1", ii.id.to_s
+    assert_equal 5, ii.quantity
+    assert_equal 1, ii.id
   end
 
 end

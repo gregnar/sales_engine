@@ -21,7 +21,7 @@ class TransactionRepository < Repository
   def find_by_id(arg); find_by(:id, arg); end
   def find_by_invoice_id(arg); find_by(:invoice_id, arg); end
   def find_by_credit_card_number(arg); find_by(:credit_card_number, arg); end
-  def find_by_credit_card_expiration_date(arg)
+  def find_by_credit_card_expiration_date(arg) 
     find_by(:credit_card_expiration_date, arg); end
   def find_by_result(arg); find_by(:result, arg); end
   def find_by_created_at(arg); find_by(:created_at, arg); end

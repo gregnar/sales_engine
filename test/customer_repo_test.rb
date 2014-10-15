@@ -4,23 +4,18 @@ require './lib/sales_engine'
 
 
 class CustomerRepoTest < Minitest::Test
+  attr_reader :engine, :customer_repository
 
-  def test_repo_gets_populated
-    customer_repository = CustomerRepository.new(SalesEngine.new, "data")
-    customer_repository.make_repo
-    assert_instance_of Customer, customer_repository.repository[0], "not instance of Customer"
-    assert_instance_of Customer, customer_repository.repository[-1], "not instance of Customer"
+  def setup
+    @engine = SalesEngine.new(File.expand_path("../data", __FILE__))
+    @customer_repository = @engine.customer_repository
   end
 
   def test_find_by_first_name
-    customer_repository = CustomerRepository.new(SalesEngine.new, "data")
-    customer_repository.make_repo
     assert_equal customer_repository.repository[1], customer_repository.find_by_first_name("cecelia")
   end
 
   def test_find_by_created_at
-    customer_repository = CustomerRepository.new(SalesEngine.new, "data")
-    customer_repository.make_repo
     assert_equal customer_repository.repository[1], customer_repository.find_by_created_at("2012-03-27 14:54:10 UTC")
   end
 
