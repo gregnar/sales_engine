@@ -1,5 +1,3 @@
-require 'bigdecimal'
-
 module Cleaner
 
   def self.clean(attribute)
@@ -10,5 +8,7 @@ module Cleaner
   def self.clean_string(attribute)
     attribute.downcase
   end
+
+
 
 end
