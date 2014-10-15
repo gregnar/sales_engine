@@ -53,7 +53,7 @@ class Invoice
                   result: data[:result],
                   created_at: DateTime.now, updated_at: DateTime.now
                   }
-    new_transaction = repository.charge(new_attrs)
+    return new_transaction = repository.charge(new_attrs)
     @transactions << new_transaction
   end
 end
