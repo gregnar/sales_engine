@@ -37,8 +37,13 @@ class TransactionRepository < Repository
   def find_invoice_by_id(invoice_id)
     sales_engine.find_invoice_by_invoice_id(invoice_id)
   end
-  
+
   def random
     repository.sample
+  end
+
+  def create(new_transaction_attrs)
+    return new_transaction = Transaction.new(new_transaction_attrs, self)
+    repository << new_transaction
   end
 end

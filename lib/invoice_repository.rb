@@ -32,8 +32,8 @@ class InvoiceRepository < Repository
   def find_all_by_created_at(arg);  find_all_by(:created_at, arg);  end
   def find_all_by_updated_at(arg);  find_all_by(:updated_at, arg);  end
 
-  def find_transaction_by_id(transaction_id)
-    sales_engine.find_transaction_by_id(transaction_id)
+  def find_transactions_by_id(invoice_id)
+    sales_engine.find_transactions_by_invoice_id(invoice_id)
   end
 
   def find_invoice_items_by_invoice_id(invoice_id)
@@ -68,5 +68,9 @@ class InvoiceRepository < Repository
 
   def random
     repository.sample
+  end
+
+  def charge(new_transaction_attrs)
+    sales_engine.new_transaction(new_transaction_attrs)
   end
 end

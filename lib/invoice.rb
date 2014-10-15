@@ -21,7 +21,7 @@ class Invoice
   end
 
   def transactions
-    @transactions  ||= repository.find_transaction_by_id(self.id)
+    @transactions ||= repository.find_transactions_by_id(self.id)
   end
 
   def successful?
@@ -44,4 +44,14 @@ class Invoice
     @merchant      ||= repository.find_merchant_by_id(self.merchant_id)
   end
 
+  def charge(data)
+    new_transaction_attrs = {
+                              invoice_id: self.id,
+                              credit_card_number: data[:credit_card_number],
+                              credit_card_expiration_date: data[:credit_card_expiration_date],
+                              result: data[:result], created_at: DateTime.now, updated_at: DateTime.now
+                              }
+    new_transaction = repository.charge(new_transaction_attrs)
+    @transactions << new_transaction
+  end
 end
