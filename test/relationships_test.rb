@@ -5,7 +5,7 @@ class RelationshipsTest < Minitest::Test
 
   def setup
     sales_engine             = SalesEngine.new(File.expand_path("../data", __FILE__))
-    sales_engine.startup #change to test files
+    sales_engine.startup
     @item_repository         = sales_engine.item_repository
     @merchant_repository     = sales_engine.merchant_repository
     @invoice_item_repository = sales_engine.invoice_item_repository
@@ -25,7 +25,6 @@ class RelationshipsTest < Minitest::Test
   end
 
   def test_invoice_item_find_by_invoice_id_method
-    #invoice item repository will need to tell sales_engine to search invoices and find all invoice items by invoice id
     invoice_item = @invoice_item_repository.repository.first
     assert_instance_of Invoice, invoice_item.invoice
   end
