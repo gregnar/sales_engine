@@ -8,8 +8,9 @@ class MerchantRepositoryTest < Minitest::Test
   attr_reader :merchant_repository, :engine
 
   def setup
-    @engine = SalesEngine.new
-    @merchant_repository = MerchantRepository.new(SalesEngine.new, "data")
+    @engine = SalesEngine.new(File.expand_path("../data", __FILE__))
+    @engine.startup
+    @merchant_repository = @engine.merchant_repository
   end
 
   def test_repo_gets_populated
@@ -37,5 +38,24 @@ class MerchantRepositoryTest < Minitest::Test
     merchant = merchant_repository.repository.last
     assert_equal "Wisozk, Hoeger and Bosco", merchant.name.to_s
     assert_equal "100", merchant.id.to_s
+  end
+
+  def test_most_revenue
+    assert_equal "Dicki-Bednar", merchant_repository.most_revenue(3).last.name
+  end
+
+  def test_most_items
+    assert_equal "Terry-Moore", merchant_repository.most_items(3).last.name
+  end
+
+  def test_revenue
+    date = Date.parse("2012-03-25 14:54:09 UTC")
+    assert_equal 21067.77, merchant_repository.revenue(date).to_f
+  end
+
+  def test_random
+    merch1 = merchant_repository.random
+    merch2 = merchant_repository.random
+    refute merch1 == merch2
   end
 end
