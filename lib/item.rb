@@ -19,13 +19,7 @@ class Item
     @repository   = repository
   end
 
-  # def total_sold
-  #   successes = invoice_items.reject_if {|ii| ii.invoice.}
-  #   invoice_items.inject(0) {|sum, ii| sum + ii.quantity}
-  # end
-
   def revenue
-    # revenue = BigDecimal.new("0")
     successful_invoice_items.inject(0) do |sum, ii|
       sum + ii.total_cost
     end
