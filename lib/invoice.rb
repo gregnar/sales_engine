@@ -45,15 +45,19 @@ class Invoice
   end
 
   def charge(data)
-    new_attrs = {
-                  invoice_id: self.id,
-                  credit_card_number: data[:credit_card_number],
-                  credit_card_expiration_date:
-                  data[:credit_card_expiration_date],
-                  result: data[:result],
-                  created_at: DateTime.now, updated_at: DateTime.now
-                  }
-    return new_transaction = repository.charge(new_attrs)
+    new_transaction = repository.charge(new_attrs data)
     @transactions << new_transaction
+    new_transaction
+  end
+
+  def new_attrs(data)
+    {
+      invoice_id: self.id,
+      credit_card_number: data[:credit_card_number],
+      credit_card_expiration_date:
+      data[:credit_card_expiration_date],
+      result: data[:result],
+      created_at: DateTime.now, updated_at: DateTime.now
+    }
   end
 end

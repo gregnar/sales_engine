@@ -17,7 +17,7 @@ class InvoiceTest < Minitest::Test
                   result: "success")
 
     invoice = @engine.invoice_repository.find_by_id(invoice.id)
-    assert_equal prior_transaction_count, invoice.transactions.count
+    assert_equal prior_transaction_count.next, invoice.transactions.count
   end
 
 end
