@@ -5,7 +5,7 @@ require "./lib/sales_engine"
 class CustomerTest < Minitest::Test
 
   def setup
-    @engine             = SalesEngine.new(File.expand_path("../data", __FILE__))
+    @engine = SalesEngine.new(File.expand_path("../data", __FILE__))
     @engine.startup
   end
 

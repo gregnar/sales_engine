@@ -40,7 +40,11 @@ class Item
   end
 
   def successful_invoice_items
-    @successful_invoice_items ||= invoice_items.select { |ii| ii.invoice.successful? }
+    @successful_invoice_items ||= find_successful_invoice_items
+  end
+
+  def find_successful_invoice_items
+    invoice_items.select { |ii| ii.invoice.successful? }
   end
 
   def merchant
