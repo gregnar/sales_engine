@@ -27,7 +27,9 @@ class Repository
   end
 
   def find_all_by(attribute, criteria)
-    repository.select { |instance| clean(instance.send(attribute.to_sym)) == clean(criteria) }
+    repository.select do |instance|
+      clean(instance.send(attribute.to_sym)) == clean(criteria)
+    end
   end
 
 end

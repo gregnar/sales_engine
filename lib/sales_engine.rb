@@ -28,10 +28,6 @@ class SalesEngine
     @transaction_repository   = TransactionRepository.new(self, path)
   end
 
-  def parsed_csv(path)
-    parser.load_csv(path)
-  end
-
   def repository_array
     [customer_repository, invoice_item_repository, invoice_repository,
     item_repository, merchant_repository, transaction_repository]
