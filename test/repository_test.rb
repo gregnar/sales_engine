@@ -34,7 +34,7 @@ class RepositoryTest < Minitest::Test
 
   def test_it_can_load_an_id
     repository = TestClassRepository.new
-    repository.populate_repository("./data/customers_test.csv", TestClass)
+    repository.populate_repository("data/customers.csv", TestClass)
     assert_equal 1, repository.repository[0].id
   end
 

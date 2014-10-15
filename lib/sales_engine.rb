@@ -16,16 +16,16 @@ class SalesEngine
               :item_repository,
               :merchant_repository,
               :transaction_repository,
-              :filepath
+              :path
 
-  def initialize(filepath = "#{File.join(File.expand_path('../..',  __FILE__))}/data")
-    @filepath                 = filepath
-    @customer_repository      = CustomerRepository.new(self, filepath)
-    @invoice_item_repository  = InvoiceItemRepository.new(self, filepath)
-    @invoice_repository       = InvoiceRepository.new(self, filepath)
-    @item_repository          = ItemRepository.new(self, filepath)
-    @merchant_repository      = MerchantRepository.new(self, filepath)
-    @transaction_repository   = TransactionRepository.new(self, filepath)
+  def initialize(path="#{File.join(File.expand_path('../..', __FILE__))}/data")
+    @path                     = path
+    @customer_repository      = CustomerRepository.new(self, path)
+    @invoice_item_repository  = InvoiceItemRepository.new(self, path)
+    @invoice_repository       = InvoiceRepository.new(self, path)
+    @item_repository          = ItemRepository.new(self, path)
+    @merchant_repository      = MerchantRepository.new(self, path)
+    @transaction_repository   = TransactionRepository.new(self, path)
   end
 
   def parsed_csv(path)

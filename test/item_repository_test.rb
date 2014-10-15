@@ -6,7 +6,7 @@ require './lib/sales_engine'
 class ItemRepositoryTest < Minitest::Test
 
   def test_repo_gets_populated
-    item_repository = ItemRepository.new(SalesEngine.new, "./data")
+    item_repository = ItemRepository.new(SalesEngine.new, "data")
     item_repository.make_repo
     assert_instance_of Item, item_repository.repository[0], "not instance of Item"
     assert_instance_of Item, item_repository.repository[-1], "not instance of Item"
